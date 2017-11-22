@@ -1,10 +1,17 @@
 var pageUrl = $(location).attr('href');
-var projectUrl = 'https://github.com/sky-uk/Digital-Help/projects/26?fullscreen=true';
+var projectUrls = [
+  'https://github.com/sky-uk/Digital-Help/projects/26?fullscreen=true',
+  'https://github.com/sky-uk/Digital-Help/projects/26',
+  'https://github.com/sky-uk/Digital-Help/projects/27?fullscreen=true',
+  'https://github.com/sky-uk/Digital-Help/projects/27',
+  'https://github.com/sky-uk/Digital-Help/projects/25?fullscreen=true',
+  'https://github.com/sky-uk/Digital-Help/projects/25'
+];
 
 let issues;
 let issueCounter = -1;
 
-if (pageUrl == projectUrl) {
+if (projectUrls.includes(pageUrl)) {
     setTimeout(() => {
         issues = $('.issue-card');
         issues.each((_index, issue) => {

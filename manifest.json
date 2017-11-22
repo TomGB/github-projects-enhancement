@@ -16,5 +16,5 @@
     "matches": ["https://github.com/*"],
     "js": ["onLoad.js"]
   }],
-  "web_accessible_resources": ["scriptInPage.js", "jquery.js", "pageStyle.css"]
+  "web_accessible_resources": ["scriptInPage.js", "jquery.js", "pageStyle.css", "urls.json"]
 }
