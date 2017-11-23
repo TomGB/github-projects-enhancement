@@ -1,30 +1,20 @@
-var pageUrl = $(location).attr('href');
-var projectUrls = [
-  'https://github.com/sky-uk/Digital-Help/projects/26?fullscreen=true',
-  'https://github.com/sky-uk/Digital-Help/projects/26',
-  'https://github.com/sky-uk/Digital-Help/projects/27?fullscreen=true',
-  'https://github.com/sky-uk/Digital-Help/projects/27',
-  'https://github.com/sky-uk/Digital-Help/projects/25?fullscreen=true',
-  'https://github.com/sky-uk/Digital-Help/projects/25'
-];
+console.log("running in page script")
 
 let issues;
 let issueCounter = -1;
 
-if (projectUrls.includes(pageUrl)) {
-    setTimeout(() => {
-        issues = $('.issue-card');
-        issues.each((_index, issue) => {
-            const prInfo=$("<div class='pr-info'></div>");
-            $(issue).append(prInfo);
-        });
-        nextIssue();
-        nextIssue();
-        nextIssue();
-        nextIssue();
-        nextIssue();
-    }, 500);
-}
+setTimeout(() => {
+    issues = $('.issue-card');
+    issues.each((_index, issue) => {
+        const prInfo=$("<div class='pr-info'></div>");
+        $(issue).append(prInfo);
+    });
+    nextIssue();
+    nextIssue();
+    nextIssue();
+    nextIssue();
+    nextIssue();
+}, 1000);
 
 setTimeout(() => {
     setInterval(() => {
@@ -34,11 +24,9 @@ setTimeout(() => {
 
 function processNewIssues() {
     newIssues = $('.issue-card').not(":has(.pr-info)");
-    console.log('doing for new issues');
-    console.log(newIssues.length);
 
     newIssues.each((_index, issue) => {
-        console.log('new issue')
+        console.log('new issue detected')
         const prInfo=$("<div class='pr-info'></div>");
         $(issue).append(prInfo);
 
