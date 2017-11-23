@@ -8,7 +8,8 @@
     color: #586069;
 }
 
-.pr-info .pr-status-content.disable-pr-status {
+.pr-info .pr-status-content.disable-pr-status,
+.pr-info .labels-container.disable-lables {
   display: none;
 }
 

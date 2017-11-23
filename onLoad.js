@@ -40,16 +40,19 @@ function extensionListener() {
     if (message.urls) {
       console.log('setting urls in local storage');
       localStorage.setItem('urls', message.urls);
-      location.reload();
-    } else if (message.toggle) {
+    } else if (message.toggleStatus) {
       console.log('toggling pr disablePrStatus');
       const disablePrStatus = JSON.parse(localStorage.getItem('disablePrStatus'));
-      console.log('setting from', disablePrStatus);
-      console.log('setting to', !disablePrStatus);
       localStorage.setItem('disablePrStatus', JSON.stringify(!disablePrStatus));
       console.log('disablePrStatus =',localStorage.getItem('disablePrStatus'));
-      location.reload();
+    } else if (message.toggleLabels) {
+      console.log('toggling pr disableLabels');
+      const disableLabels = JSON.parse(localStorage.getItem('disableLabels'));
+      localStorage.setItem('disableLabels', JSON.stringify(!disableLabels));
+      console.log('disableLabels =',localStorage.getItem('disableLabels'));
     }
+
+    location.reload();
   });
 }
 

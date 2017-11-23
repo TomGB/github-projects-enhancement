@@ -1,8 +1,10 @@
 console.log("running in page script")
 
 const disablePrStatus = JSON.parse(localStorage.getItem('disablePrStatus'));
+const disableLabels = JSON.parse(localStorage.getItem('disableLabels'));
 
 console.log("disablePrStatus =",disablePrStatus);
+console.log("disableLabels =",disableLabels);
 
 let issues;
 let issueCounter = -1;
@@ -57,9 +59,7 @@ function getPRForIssue(url, issue) {
         const firstPR = prUrls[0]
 
         const prInfo = $(issue).find('.pr-info');
-
-        const labels = $(issuePage).find('.discussion-sidebar-item:eq(1)')
-        prInfo.append(labels);
+        $(prInfo).append(getLabels(issuePage));
 
         if (firstPR) {
             getTitleForPR(firstPR, prInfo);
@@ -126,4 +126,11 @@ function getIssueLink(issue) {
     } else {
         return undefined;
     }
+}
+
+function getLabels(issuePage) {
+    const labels = $(issuePage).find('.discussion-sidebar-item:eq(1)');
+    const labelsContainer = $(`<div class='labels-container ${disableLabels ? 'disable-lables' : ''}'></div>`);
+    $(labelsContainer).append(labels);
+    return labelsContainer
 }
