@@ -1,5 +1,9 @@
 console.log("running in page script")
 
+const disablePrStatus = JSON.parse(localStorage.getItem('disablePrStatus'));
+
+console.log("disablePrStatus =",disablePrStatus);
+
 let issues;
 let issueCounter = -1;
 
@@ -26,14 +30,14 @@ function processNewIssues() {
     newIssues = $('.issue-card').not(":has(.pr-info)");
 
     newIssues.each((_index, issue) => {
-        console.log('new issue detected')
+        console.log()
         const prInfo=$("<div class='pr-info'></div>");
         $(issue).append(prInfo);
 
         const issueLink = getIssueLink(issue);
 
-        console.log(issueLink)
         if (issueLink) {
+            console.log('new issue detected', issueLink);
             getPRForIssue(issueLink, issue);
         }
     });
@@ -66,9 +70,13 @@ function getTitleForPR(url, issue) {
         const html = $.parseHTML(data);
         const repo = $(html).find('*[data-pjax="#js-repo-pjax-container"]').html();
         const title = $(html).find(".js-issue-title").html();
-        $(issue).append("<div class='pr-link'>"+repo+": <a href='"+url+"'>"+title+"</a></div>");
+
+        const prContent = $("<div class='pr-info-content'></div>");
+        $(prContent).append("<div class='pr-link'>"+repo+": <a href='"+url+"'>"+title+"</a></div>");
 
         const statuses = $(html).find(".js-details-container.Details .branch-action-item");
+
+        const prStatusContainer = $(`<div class='pr-status-content ${disablePrStatus ? 'disable-pr-status' : ''}'></div>`);
 
         if (statuses) {
             statuses.each((_index, status) => {
@@ -80,10 +88,14 @@ function getTitleForPR(url, issue) {
                     $(statusHTML).append(statusIcon);
                     $(statusHTML).append(statusText);
 
-                    $(issue).append(statusHTML);
+                    $(prStatusContainer).append(statusHTML);
                 }
             });
         }
+
+        $(prContent).append(prStatusContainer);
+
+        $(issue).append(prContent);
 
         nextIssue();
     });

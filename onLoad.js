@@ -37,8 +37,19 @@ function injectScript() {
 
 function extensionListener() {
   chrome.runtime.onMessage.addListener((message) => {
-    console.log('setting urls in local storage');
-    localStorage.setItem('urls', message.urls);
+    if (message.urls) {
+      console.log('setting urls in local storage');
+      localStorage.setItem('urls', message.urls);
+      location.reload();
+    } else if (message.toggle) {
+      console.log('toggling pr disablePrStatus');
+      const disablePrStatus = JSON.parse(localStorage.getItem('disablePrStatus'));
+      console.log('setting from', disablePrStatus);
+      console.log('setting to', !disablePrStatus);
+      localStorage.setItem('disablePrStatus', JSON.stringify(!disablePrStatus));
+      console.log('disablePrStatus =',localStorage.getItem('disablePrStatus'));
+      location.reload();
+    }
   });
 }
 

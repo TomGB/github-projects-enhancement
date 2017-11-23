@@ -14,3 +14,11 @@ saveButton.addEventListener('click', () => {
     alert('error in input. please enter urls seperated by new lines')
   }
 });
+
+const togglePrInfo = document.getElementById('togglePrInfo');
+
+togglePrInfo.addEventListener('click', () => {
+  chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+    chrome.tabs.sendMessage(tabs[0].id, { toggle: true });
+  });
+});

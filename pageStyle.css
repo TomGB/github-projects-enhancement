@@ -1,4 +1,4 @@
-.pr-info {
+.pr-info .pr-info-content {
   padding: 5px;
 }
 
@@ -6,6 +6,10 @@
     padding-left: 27px;
     font-size: 13px;
     color: #586069;
+}
+
+.pr-info .pr-status-content.disable-pr-status {
+  display: none;
 }
 
 .pr-info .details {
