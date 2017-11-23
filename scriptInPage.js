@@ -45,7 +45,8 @@ function processNewIssues() {
 
 function getPRForIssue(url, issue) {
     $.get( url, function( data ) {
-        const allURLs = $($.parseHTML(data)).find("a").map(function() {
+        const issuePage = $.parseHTML(data);
+        const allURLs = $(issuePage).find("a").map(function() {
             return this.href;
         }).get();
 
@@ -56,6 +57,9 @@ function getPRForIssue(url, issue) {
         const firstPR = prUrls[0]
 
         const prInfo = $(issue).find('.pr-info');
+
+        const labels = $(issuePage).find('.discussion-sidebar-item:eq(1)')
+        prInfo.append(labels);
 
         if (firstPR) {
             getTitleForPR(firstPR, prInfo);

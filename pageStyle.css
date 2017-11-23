@@ -28,3 +28,17 @@
   transform: scale(0.8);
   transform-origin: left;
 }
+
+.pr-info .discussion-sidebar-item {
+  margin-top: -39px;
+}
+
+.pr-info .discussion-sidebar-toggle {
+  margin: -5px 0 5px;
+  padding: 0px 31px;
+  font-size: 0px;
+}
+
+.pr-info .labels {
+  display: none;
+}
